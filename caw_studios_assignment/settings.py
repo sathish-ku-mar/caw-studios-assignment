@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '48v8y=-bioy!_!@mam)9gb&pu%-%lfo*r^1=291&xn^6(8&fwp'
 SECRET_CIPHER_KEY = b'B-hybaMc0bkXf090S5cdKmIru0mK88JwkcRMY058xws='
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['caw-studios-assignment.herokuapp.com']
 
 
 # Application definition
