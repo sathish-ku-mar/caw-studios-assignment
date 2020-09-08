@@ -21,4 +21,5 @@ urlpatterns = [
     path(r'user/', include(('account.urls', 'account'), namespace='user')),
     path(r'movie/', include(('movie.urls', 'movie'), namespace='movie')),
     path(r'cinema/', include(('cinema.urls', 'cinema'), namespace='cinema')),
+    path(r'booking/', include(('booking.urls', 'booking'), namespace='booking')),
 ]

@@ -1,6 +1,7 @@
 from django.db import models
 from account.models import CommonModel
 # Create your models here.
+
 from movie.models import Movie
 
 
@@ -23,7 +24,7 @@ class Cinema(CommonModel):
         return str(self.name)
 
     @classmethod
-    def get_movies_all(cls):
+    def get_cinemas_all(cls):
         """
         Get all the cinemas
         :param: None
@@ -35,7 +36,7 @@ class Cinema(CommonModel):
     @classmethod
     def get_all_cinema_by_city(cls, city_name):
         """
-        Get all the cinemas
+        Get all the cinemas by city
         :param city_name: get the name of the city
         :return: Cinema object
         :rtype: django.db.models.query.QuerySet
@@ -62,6 +63,15 @@ class Screen(CommonModel):
 
     def __str__(self):
         return str(self.name)
+
+    def get_no_of_seats(self):
+        """
+        Get the number seats in the screen
+        :param: None
+        :return: Number of seats
+        :rtype: float
+        """
+        return self.no_of_seats
 
 
 class SeatClass(models.Model):
@@ -102,9 +112,9 @@ class Show(CommonModel):
     @classmethod
     def get_all_movies_by_city(cls, city_name):
         """
-        Get all the cinemas
+        Get all the movies by city
         :param city_name: get the name of the city
-        :return: Cinema object
+        :return: Show object
         :rtype: django.db.models.query.QuerySet
         """
         movie_ids = cls.objects.filter(cinema__city=city_name).values_list('movie', flat=True)
@@ -113,9 +123,21 @@ class Show(CommonModel):
     @classmethod
     def get_all_cinemas_along_with_showtimes_by_movie(cls, movie_id):
         """
-        Get all the cinemas
+        Get all the cinemas along with showtimes by movie
         :param movie_id: get the id of the movie
-        :return: Cinema object
+        :return: Show object
         :rtype: django.db.models.query.QuerySet
         """
         return cls.objects.filter(movie_id=movie_id)
+
+    @classmethod
+    def get_availabe_seats_by_showtimes(cls, show_id):
+        """
+        Get available seats by showtimes
+        :param show_id: get the id of the show
+        :return: Show object
+        :rtype: django.db.models.query.QuerySet
+        """
+        from django.apps import apps
+
+        return cls.objects.get(id=show_id).screen.get_no_of_seats() - apps.get_model('booking.Booking').get_booked_count(show_id)
