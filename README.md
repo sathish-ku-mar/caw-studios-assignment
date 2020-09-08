@@ -11,7 +11,7 @@ Once the environment has been created, activate the environment:<br />`$ conda a
 ------------
 ### 2. Clone project to the local machine
 In the terminal, navigate to the location where the project folder has to be created. Then enter the git command to clone the project:<br />`$ git clone https://github.com/sathish-ku-mar/caw-studios-assignment.git`<br />
-Once cloned, change the directory to **fynd_assignment**<br />`$ cd fynd_assignment`
+Once cloned, change the directory to **fynd_assignment**<br />`$ cd caw-studios-assignment`
 
 ------------
 ### 3. Install the project requirements
